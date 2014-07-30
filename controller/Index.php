@@ -3,8 +3,7 @@
 * @Desc
 *
 */
-
-class Index extends \Library\Controller
+class IndexController extends \Library\Controller
 {
 
 }
