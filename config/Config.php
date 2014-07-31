@@ -3,9 +3,10 @@
 * @Desc config
 *
 */
+namespace Config;
 
-final class Config
+final class Info
 {
-	$db = array();
-	$cache = array();
+	public $db = array();
+	public $cache = array();
 }

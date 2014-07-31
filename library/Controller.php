@@ -36,11 +36,11 @@ abstract class Controller
 			if(!empty($result))
 			{
 				$method = $controllerName . '.' . $actionName;
-				$this->setRes($method, $result);
+				$this->setResponse($method, $result);
 				$this->output();
 			}
 		}else{
-			throw new Exception("action was not found : " . $controllerName . "::" . $actionName, 404);
+			throw new \Exception("action was not found : " . $controllerName . "::" . $actionName);
 		}
 
 		return true;
@@ -52,7 +52,7 @@ abstract class Controller
 	* @Param array $response
 	* @Return void
 	*/
-	final protected function setRes($method = null, $response = array())
+	final protected function setResponse($method = null, $response = array())
 	{
 		$this->response[$method] = $response;
 	}
@@ -64,7 +64,16 @@ abstract class Controller
 	*/
 	final protected function output()
 	{
-		print(json_encode($this->response));
+		$response = array();
+		if(!empty($this->response))
+		{
+			foreach($this->response as $method=>$value)
+			{
+				$response[] = array_merge(array('method' => $method), $value);
+			}
+		}
+
+		print(json_encode($response));
 	}
 
 	/**
@@ -93,9 +102,9 @@ abstract class Controller
 	final protected function getModel($name = null)
 	{
 		$model = null;
-		if($this->import($name, 'model'))
+		if($this->import('Model', 'library'))
 		{
-			if($this->import('Model', 'library'))
+			if($this->import($name, 'model'))
 			{
 				$modelName = ucfirst($name) . 'Model';
 				$model = new $modelName;
@@ -148,7 +157,7 @@ abstract class Controller
 	{
 		if($this->import('Config', 'config'))
 		{
-			$this->config = new Config;
+			$this->config = new \Config\Info;
 		}
 
 		return true;

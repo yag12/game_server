@@ -11,21 +11,42 @@ $(document).ready(function()
 {
 	$("#submitBtn").click(function()
 	{
-		
+		var url = "./";
+		var method = {};
+		var request = $("#request").val();
+		if(request != "") method = JSON.parse(request);
+
+		$.ajax({
+			url: url,
+			data: method,
+			type: "POST",
+			dataType: "json",
+			success: function(data){
+				if(data != "undefined")
+				{
+					var val = JSON.stringify(data);
+					$("#response").val(val);
+				}
+			}
+		});
 	});
 });
 </script>
 </head>
 <body>
 
-<div style="width:300px; height:400px;">
-	<textarea id="method" style="width:100%; height:100%;">{
+<div style="width:500px; height:600px; float:left; margin:10px;">
+	<textarea id="request" style="width:100%; height:100%;">{
 	"method":"index.index",
 	"params":{
 
 	}
 }</textarea>
 	<input type="button" value="확인" id="submitBtn" />
+</div>
+<div style="height:600px; float:left; padding-top:200px; margin:4px;">=></div>
+<div style="width:500px; height:600px; float:left; margin:10px;">
+	<textarea id="response" style="width:100%; height:100%;"></textarea>
 </div>
 
 </body>

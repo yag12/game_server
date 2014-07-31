@@ -39,7 +39,7 @@ class Dispatcher
 		{
 			if(empty($_POST['method']) ||  empty(strpos($_POST['method'], '.')))
 			{
-				//throw new Exception("not found method.", 500);
+				throw new \Exception("not found method.");
 				return false;
 			}
 
@@ -55,13 +55,13 @@ class Dispatcher
 				require_once $controllerFile;
 
 				$controller = $controllerName . 'Controller';
-				if(class_exists($controllerName))
+				if(class_exists($controller))
 				{
 					$obj = new $controller;
 					return $obj->startup($controllerName, $actionName, $params);
 				}
 			}else{
-				//throw new Exception("file not found : " . $controllerFile, 404);
+				throw new \Exception("file not found : " . $controllerFile);
 				return false;
 			}
 		}catch(Exception $e)
