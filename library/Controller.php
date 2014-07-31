@@ -17,7 +17,7 @@ abstract class Controller
 	* @Param string $controllerName
 	* @Param string $actionName
 	* @Param array $params
-	* @Return boolean
+	* @Return mixed
 	*/
 	final public function startup($controllerName = 'Index', $actionName = 'index', $params = array())
 	{
@@ -37,7 +37,7 @@ abstract class Controller
 			{
 				$method = $controllerName . '.' . $actionName;
 				$this->setResponse($method, $result);
-				$this->output();
+				return $this->output();
 			}
 		}else{
 			throw new \Exception("action was not found : " . $controllerName . "::" . $actionName);
@@ -59,8 +59,8 @@ abstract class Controller
 
 	/**
 	* @Desc output json data
-	* @Param void
-	* @Return void
+	* @Param boolean $response
+	* @Return mixed
 	*/
 	final protected function output()
 	{
@@ -69,11 +69,14 @@ abstract class Controller
 		{
 			foreach($this->response as $method=>$value)
 			{
-				$response[] = array_merge(array('method' => $method), $value);
+				$response[] = array(
+					'method' => $method,
+					'data' => $value,
+				);
 			}
 		}
 
-		print(json_encode($response));
+		return $response;
 	}
 
 	/**

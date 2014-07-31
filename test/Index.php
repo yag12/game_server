@@ -11,6 +11,11 @@ class IndexTest extends PHPUnit_Framework_TestCase
 
 	public function testController()
 	{
-		$this->assertEquals(1, 1);
+		$response = \Library\Dispatcher::startup(array(
+			'method' => 'Index.index',
+			'params' => array(),
+		));
+
+		$this->assertEquals(10, $response[1]['data']['test']);
 	}
 }
