@@ -110,7 +110,7 @@ abstract class Controller
 			if($this->import($name, 'model'))
 			{
 				$modelName = ucfirst($name) . 'Model';
-				$model = new $modelName;
+				$model = new $modelName($this->config->db);
 			}
 		}
 
@@ -161,9 +161,31 @@ abstract class Controller
 		if($this->import('Config', 'config'))
 		{
 			$this->config = new \Config\Info;
+			
+			if(!empty($this->config->db)) $this->database();
 		}
 
 		return true;
+	}
+
+	/**
+	* @Desc database connect
+	* @Param void
+	* @Return void
+	*/
+	private function database()
+	{
+		foreach($this->config->db as &$db)
+		{
+			switch($db['type'])
+			{
+				case 'mongo':
+					if($this->import('Model/Mongo', 'library')) new \Library\Model\Mongo($db);
+					break;
+				case 'mysqli':
+					break;
+			}
+		}
 	}
 
 	/**
