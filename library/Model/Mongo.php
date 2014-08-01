@@ -5,7 +5,7 @@
 */
 namespace Library\Model;
 
-class Mongo
+class Mongo implements \Library\Model\InterfaceModel
 {
 	protected $db;
 
@@ -25,7 +25,7 @@ class Mongo
 	* @Param void
 	* @Return void
 	*/
-	protected function connection()
+	public function connection()
 	{
 		$server = 'mongodb://' . $this->db['host'] . (!empty($this->db['port']) ? ':' . $this->db['port'] : '');
 		$options = array('connect' => true);
@@ -44,5 +44,32 @@ class Mongo
 		{
 			$this->db['db'] = $mongo->selectDB($this->db['name']);
 		}
+	}
+
+	/**
+	* @Desc db select
+	*
+	*/
+	public function find()
+	{
+
+	}
+
+	/**
+	* @Desc db insert or update
+	*
+	*/
+	public function save()
+	{
+
+	}
+
+	/**
+	* @Desc db delete
+	*
+	*/
+	public function remove()
+	{
+
 	}
 }

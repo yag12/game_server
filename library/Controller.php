@@ -175,15 +175,18 @@ abstract class Controller
 	*/
 	private function database()
 	{
-		foreach($this->config->db as &$db)
+		if($this->import('Model/InterfaceModel', 'library'))
 		{
-			switch($db['type'])
+			foreach($this->config->db as &$db)
 			{
-				case 'mongo':
-					if($this->import('Model/Mongo', 'library')) new \Library\Model\Mongo($db);
-					break;
-				case 'mysqli':
-					break;
+				switch($db['type'])
+				{
+					case 'mongo':
+						if($this->import('Model/Mongo', 'library')) new \Library\Model\Mongo($db);
+						break;
+					case 'mysqli':
+						break;
+				}
 			}
 		}
 	}

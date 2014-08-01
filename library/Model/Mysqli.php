@@ -5,7 +5,7 @@
 */
 namespace Library\Model;
 
-class Mysqli
+class Mysqli implements \Library\Model\InterfaceModel
 {
 	protected $db;
 
@@ -25,7 +25,34 @@ class Mysqli
 	* @Param void
 	* @Return void
 	*/
-	protected function connection()
+	public function connection()
+	{
+
+	}
+
+	/**
+	* @Desc db select
+	*
+	*/
+	public function find()
+	{
+
+	}
+
+	/**
+	* @Desc db insert or update
+	*
+	*/
+	public function save()
+	{
+
+	}
+
+	/**
+	* @Desc db delete
+	*
+	*/
+	public function remove()
 	{
 
 	}
