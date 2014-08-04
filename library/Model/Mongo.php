@@ -50,26 +50,17 @@ class Mongo implements \Library\Model\InterfaceModel
 	* @Desc db select
 	*
 	*/
-	public function find()
-	{
-
-	}
+	public function find(){ }
 
 	/**
 	* @Desc db insert or update
 	*
 	*/
-	public function save()
-	{
-
-	}
+	public function save(){ }
 
 	/**
 	* @Desc db delete
 	*
 	*/
-	public function remove()
-	{
-
-	}
+	public function remove(){ }
 }

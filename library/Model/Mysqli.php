@@ -25,35 +25,23 @@ class Mysqli implements \Library\Model\InterfaceModel
 	* @Param void
 	* @Return void
 	*/
-	public function connection()
-	{
-
-	}
+	public function connection(){ }
 
 	/**
 	* @Desc db select
 	*
 	*/
-	public function find()
-	{
-
-	}
+	public function find(){ }
 
 	/**
 	* @Desc db insert or update
 	*
 	*/
-	public function save()
-	{
-
-	}
+	public function save(){ }
 
 	/**
 	* @Desc db delete
 	*
 	*/
-	public function remove()
-	{
-
-	}
+	public function remove(){ }
 }
